@@ -265,27 +265,27 @@
 
         <div class="stats">
             <div class="stat-card">
-                <h3>47</h3>
+                <h3 id="stat-municipios">47</h3>
                 <p>Municípios</p>
             </div>
             <div class="stat-card">
-                <h3>R$ 197.455,96</h3>
+                <h3 id="stat-investimento">R$ 197.455,96</h3>
                 <p>Investimento Total</p>
             </div>
             <div class="stat-card">
-                <h3>4</h3>
-                <p>Departamentos</p>
+                <h3 id="stat-departamentos">4</h3>
+                <p id="stat-departamentos-label">Departamentos</p>
             </div>
             <div class="stat-card">
-                <h3>221</h3>
+                <h3 id="stat-efetivo">221</h3>
                 <p>Efetivo Total</p>
             </div>
             <div class="stat-card">
-                <h3>33</h3>
+                <h3 id="stat-ordinario">33</h3>
                 <p>Ordinário</p>
             </div>
             <div class="stat-card">
-                <h3>14</h3>
+                <h3 id="stat-extraordinario">14</h3>
                 <p>Extraordinário</p>
             </div>
         </div>
@@ -1685,6 +1685,73 @@
                     map.fitBounds(group.getBounds().pad(0.1));
                 }
             }, 100);
+            
+            // Atualizar estatísticas
+            atualizarEstatisticas();
+        }
+
+        // Função para atualizar estatísticas baseado nos filtros ativos
+        function atualizarEstatisticas() {
+            const cardsVisiveis = document.querySelectorAll('.municipio-card:not(.hidden)');
+            let totalMunicipios = 0;
+            let totalInvestimento = 0;
+            let totalEfetivo = 0;
+            let totalOrdinario = 0;
+            let totalExtraordinario = 0;
+            let departamentosUnicos = new Set();
+
+            cardsVisiveis.forEach(card => {
+                const key = card.getAttribute('data-key');
+                const municipio = municipios[key];
+                
+                if (municipio) {
+                    totalMunicipios++;
+                    departamentosUnicos.add(municipio.departamento);
+                    
+                    // Somar investimento
+                    const valorStr = municipio.valor.replace('R$', '').replace(/\./g, '').replace(',', '.').trim();
+                    const valor = parseFloat(valorStr);
+                    if (!isNaN(valor)) {
+                        totalInvestimento += valor;
+                    }
+                    
+                    // Contar efetivo
+                    const efetivo = municipio.efetivo;
+                    if (efetivo && efetivo !== '-') {
+                        // Extrair números do efetivo
+                        const numeros = efetivo.match(/\d+/g);
+                        if (numeros) {
+                            numeros.forEach(num => {
+                                totalEfetivo += parseInt(num);
+                            });
+                        }
+                    }
+                    
+                    // Contar tipo
+                    if (municipio.tipo === 'ORDINÁRIO') {
+                        totalOrdinario++;
+                    } else if (municipio.tipo === 'EXTRAORDINÁRIO') {
+                        totalExtraordinario++;
+                    }
+                }
+            });
+
+            // Atualizar cards
+            document.getElementById('stat-municipios').textContent = totalMunicipios;
+            document.getElementById('stat-investimento').textContent = 'R$ ' + totalInvestimento.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            
+            // Se está filtrando por departamento específico, mostrar o nome
+            if (departamentoAtivo !== 'todos') {
+                document.getElementById('stat-departamentos').textContent = '1';
+                document.getElementById('stat-departamentos-label').textContent = departamentoAtivo;
+            } else {
+                document.getElementById('stat-departamentos').textContent = departamentosUnicos.size;
+                document.getElementById('stat-departamentos-label').textContent = 'Departamentos';
+            }
+            
+            document.getElementById('stat-efetivo').textContent = totalEfetivo;
+            document.getElementById('stat-ordinario').textContent = totalOrdinario;
+            document.getElementById('stat-extraordinario').textContent = totalExtraordinario;
         }
 
         // Adicionar título ao mapa
