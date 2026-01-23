@@ -1690,6 +1690,25 @@
             atualizarEstatisticas();
         }
 
+        // Função para calcular efetivo de texto
+        function calcularEfetivo(efetivoTexto) {
+            if (!efetivoTexto || efetivoTexto === '-') return 0;
+            
+            // Padrões específicos
+            if (efetivoTexto.includes('56')) return 56; // CEPROD
+            if (efetivoTexto.includes('3 OIP UR')) return 7; // 1 DPC + 3 OIP + 3 OIP UR = 7
+            if (efetivoTexto.includes('1 DPC + 6 OIP + 1 REFORÇO OIP')) return 8;
+            if (efetivoTexto.includes('6 OIP + 1 OIP REFORÇO')) return 7;
+            if (efetivoTexto.includes('1 DPC + 3 OIP')) return 4;
+            if (efetivoTexto.includes('1 DPC + 2 OIP')) return 3;
+            if (efetivoTexto.includes('3 OIP + 1 REFORÇO') || efetivoTexto.includes('3 OIP + 1 OIP REFORÇO')) return 4;
+            if (efetivoTexto.includes('3 OIP')) return 3;
+            if (efetivoTexto.includes('2 OIP')) return 2;
+            if (efetivoTexto.includes('1 OIP')) return 1;
+            
+            return 0;
+        }
+
         // Função para atualizar estatísticas baseado nos filtros ativos
         function atualizarEstatisticas() {
             const cardsVisiveis = document.querySelectorAll('.municipio-card:not(.hidden)');
@@ -1715,17 +1734,8 @@
                         totalInvestimento += valor;
                     }
                     
-                    // Contar efetivo
-                    const efetivo = municipio.efetivo;
-                    if (efetivo && efetivo !== '-') {
-                        // Extrair números do efetivo
-                        const numeros = efetivo.match(/\d+/g);
-                        if (numeros) {
-                            numeros.forEach(num => {
-                                totalEfetivo += parseInt(num);
-                            });
-                        }
-                    }
+                    // Contar efetivo usando função específica
+                    totalEfetivo += calcularEfetivo(municipio.efetivo);
                     
                     // Contar tipo
                     if (municipio.tipo === 'ORDINÁRIO') {
