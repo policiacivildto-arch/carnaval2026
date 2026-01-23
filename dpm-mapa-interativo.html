@@ -265,7 +265,7 @@
 
         <div class="stats">
             <div class="stat-card">
-                <h3 id="stat-municipios">54</h3>
+                <h3 id="stat-municipios">57</h3>
                 <p>Municípios</p>
             </div>
             <div class="stat-card">
@@ -281,7 +281,7 @@
                 <p>Efetivo Total</p>
             </div>
             <div class="stat-card">
-                <h3 id="stat-ordinario">39</h3>
+                <h3 id="stat-ordinario">42</h3>
                 <p>Ordinário</p>
             </div>
             <div class="stat-card">
@@ -333,6 +333,9 @@
                     </button>
                     <button class="filter-btn" data-filtro-depto onclick="filtrarPorDepartamento('DPE')">
                         ⚖️ DPE
+                    </button>
+                    <button class="filter-btn" data-filtro-depto onclick="filtrarPorDepartamento('DPGV')">
+                        👩 DPGV
                     </button>
                 </div>
                 
@@ -1127,6 +1130,49 @@
                         <p class="valor zero">💰 R$ 0,00</p>
                     </div>
                 </div>
+
+                <!-- DPGV -->
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-departamento="DPGV" data-key="dca" onclick="focusMap('dca')">
+                    <h3>
+                        DCA
+                        <span class="badge ordinario">ORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>🏛️ Departamento:</strong> DPGV</p>
+                        <p><strong>⏰ Horário:</strong> 24h</p>
+                        <p><strong>👮 Efetivo:</strong> 1 DPC + 6 OIP (3 extras + 4 ordinários)</p>
+                        <p><strong>📅 Ano:</strong> 14/02/2026</p>
+                        <p class="valor zero">💰 R$ 0,00</p>
+                    </div>
+                </div>
+
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-departamento="DPGV" data-key="ddm" onclick="focusMap('ddm')">
+                    <h3>
+                        DDM
+                        <span class="badge ordinario">ORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>🏛️ Departamento:</strong> DPGV</p>
+                        <p><strong>⏰ Horário:</strong> 24h</p>
+                        <p><strong>👮 Efetivo:</strong> 1 DPC + 6 OIP (2 extras + 5 ordinários)</p>
+                        <p><strong>📅 Ano:</strong> 14/02/2026</p>
+                        <p class="valor zero">💰 R$ 0,00</p>
+                    </div>
+                </div>
+
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-departamento="DPGV" data-key="ddm_juazeiro" onclick="focusMap('ddm_juazeiro')">
+                    <h3>
+                        DDM JUAZEIRO
+                        <span class="badge ordinario">ORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>🏛️ Departamento:</strong> DPGV</p>
+                        <p><strong>⏰ Horário:</strong> 24h</p>
+                        <p><strong>👮 Efetivo:</strong> 3 OIP (2 extras + 1 ordinário)</p>
+                        <p><strong>📅 Ano:</strong> 14/02/2026</p>
+                        <p class="valor zero">💰 R$ 0,00</p>
+                    </div>
+                </div>
             </div>
 
             <div id="map"></div>
@@ -1763,6 +1809,40 @@
                 status: '-',
                 cor: '#27ae60',
                 departamento: 'DPE'
+            },
+            // DPGV
+            dca: {
+                coords: [-3.7250, -38.5350],
+                nome: 'DCA',
+                tipo: 'ORDINÁRIO',
+                horario: '24h',
+                efetivo: '1 DPC + 6 OIP',
+                valor: 'R$ 0,00',
+                status: '-',
+                cor: '#27ae60',
+                departamento: 'DPGV'
+            },
+            ddm: {
+                coords: [-3.7400, -38.5280],
+                nome: 'DDM',
+                tipo: 'ORDINÁRIO',
+                horario: '24h',
+                efetivo: '1 DPC + 6 OIP',
+                valor: 'R$ 0,00',
+                status: '-',
+                cor: '#27ae60',
+                departamento: 'DPGV'
+            },
+            ddm_juazeiro: {
+                coords: [-7.2131, -39.3150],
+                nome: 'DDM JUAZEIRO',
+                tipo: 'ORDINÁRIO',
+                horario: '24h',
+                efetivo: '3 OIP',
+                valor: 'R$ 0,00',
+                status: '-',
+                cor: '#27ae60',
+                departamento: 'DPGV'
             }
         };
 
