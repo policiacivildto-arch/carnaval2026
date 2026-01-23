@@ -1026,6 +1026,17 @@
             maxZoom: 18
         }).addTo(map);
 
+        // Efetivo real por departamento
+        const efetivoRealPorDepartamento = {
+            'DPM': { comAporte: 18, semAporte: 14 },
+            'DPI NORTE': { comAporte: 309, semAporte: 193 },
+            'DPI SUL': { comAporte: 283, semAporte: 151 },
+            'COPLAN': { comAporte: 284, semAporte: 264 },
+            'DTO': { comAporte: 198, semAporte: 198 },
+            'DHPP': { comAporte: 127, semAporte: 42 },
+            'DPGV': { comAporte: 102, semAporte: 102 }
+        };
+
         // Coordenadas dos municípios (aproximadas)
         const municipios = {
             paracuru: {
@@ -1718,6 +1729,11 @@
             let totalOrdinario = 0;
             let totalExtraordinario = 0;
             let departamentosUnicos = new Set();
+            let departamentosParaEfetivo = new Set();
+
+            // Verificar qual filtro de aporte está ativo
+            const btnAporteAtivo = document.querySelector('.filter-btn:not([data-filtro-depto]).active');
+            const filtroAporte = btnAporteAtivo && btnAporteAtivo.textContent.includes('Sem Aporte') ? 'semAporte' : 'comAporte';
 
             cardsVisiveis.forEach(card => {
                 const key = card.getAttribute('data-key');
@@ -1726,6 +1742,7 @@
                 if (municipio) {
                     totalMunicipios++;
                     departamentosUnicos.add(municipio.departamento);
+                    departamentosParaEfetivo.add(municipio.departamento);
                     
                     // Somar investimento
                     const valorStr = municipio.valor.replace('R$', '').replace(/\./g, '').replace(',', '.').trim();
@@ -1734,15 +1751,19 @@
                         totalInvestimento += valor;
                     }
                     
-                    // Contar efetivo usando função específica
-                    totalEfetivo += calcularEfetivo(municipio.efetivo);
-                    
                     // Contar tipo
                     if (municipio.tipo === 'ORDINÁRIO') {
                         totalOrdinario++;
                     } else if (municipio.tipo === 'EXTRAORDINÁRIO') {
                         totalExtraordinario++;
                     }
+                }
+            });
+
+            // Calcular efetivo usando valores reais por departamento
+            departamentosParaEfetivo.forEach(depto => {
+                if (efetivoRealPorDepartamento[depto]) {
+                    totalEfetivo += efetivoRealPorDepartamento[depto][filtroAporte];
                 }
             });
 
