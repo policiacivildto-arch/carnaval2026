@@ -355,10 +355,11 @@
                     </h3>
                     <div class="municipio-info">
                         <p><strong>🏛️ Departamento:</strong> DPM</p>
-                        <p><strong>⏰ Horário:</strong> 24h</p>
-                        <p><strong>👮 Efetivo:</strong> 1 DPC + 2 OIP</p>
-                        <p><strong>📅 Status:</strong> A DEFINIR</p>
-                        <p class="valor">💰 R$ 8.707,48</p>
+                        <p><strong>⏰ Horário:</strong> 18h às 06h</p>
+                        <p><strong>👮 Efetivo:</strong> 1 DPC + 3 OIP</p>
+                        <p><strong>📅 Ano:</strong> 14/02/2026</p>
+                        <p class="valor">💰 R$ 11.267,52</p>
+                        <p><strong>📋 Obs:</strong> APORTE NECESSÁRIO</p>
                     </div>
                 </div>
 
@@ -385,8 +386,9 @@
                         <p><strong>🏛️ Departamento:</strong> DPM</p>
                         <p><strong>⏰ Horário:</strong> 24h</p>
                         <p><strong>👮 Efetivo:</strong> 3 OIP + 1 REFORÇO DE OIP</p>
-                        <p><strong>📅 Status:</strong> A DEFINIR</p>
+                        <p><strong>📅 Ano:</strong> 14/02/2026</p>
                         <p class="valor">💰 R$ 3.965,44</p>
+                        <p><strong>📋 Obs:</strong> APORTE NECESSÁRIO PARA REFORÇO</p>
                     </div>
                 </div>
 
@@ -398,7 +400,7 @@
                     <div class="municipio-info">
                         <p><strong>🏛️ Departamento:</strong> DPM</p>
                         <p><strong>⏰ Horário:</strong> 24h</p>
-                        <p><strong>👮 Efetivo:</strong> 1 DPC + 3 OIP</p>
+                        <p><strong>👮 Efetivo:</strong> 3 OIP</p>
                         <p><strong>📅 Status:</strong> -</p>
                         <p class="valor zero">💰 R$ 0,00</p>
                     </div>
@@ -412,20 +414,20 @@
                     <div class="municipio-info">
                         <p><strong>🏛️ Departamento:</strong> DPM</p>
                         <p><strong>⏰ Horário:</strong> 24h</p>
-                        <p><strong>👮 Efetivo:</strong> 3 OIP</p>
+                        <p><strong>👮 Efetivo:</strong> 3 OIP + 1 REFORÇO DE OIP</p>
                         <p><strong>📅 Status:</strong> -</p>
-                        <p class="valor zero">💰 R$ 0,00</p>
+                        <p class="valor">💰 R$ 5.438,68</p>
                     </div>
                 </div>
 
                 <div class="municipio-card ordinario" data-aporte="sem-aporte" data-departamento="DPM" data-key="itaitinga" onclick="focusMap('itaitinga')">
                     <h3>
-                        ITAITINGA
+                        ITAITINGA *SAP
                         <span class="badge ordinario">ORDINÁRIO</span>
                     </h3>
                     <div class="municipio-info">
                         <p><strong>🏛️ Departamento:</strong> DPM</p>
-                        <p><strong>⏰ Horário:</strong> 24h</p>
+                        <p><strong>⏰ Horário:</strong> 08h às 19h</p>
                         <p><strong>👮 Efetivo:</strong> 1 DPC + 2 OIP</p>
                         <p><strong>📅 Status:</strong> -</p>
                         <p class="valor zero">💰 R$ 0,00</p>
@@ -1203,7 +1205,7 @@
 
         // Efetivo real por departamento
         const efetivoRealPorDepartamento = {
-            'DPM': { comAporte: 92, semAporte: 62 },
+            'DPM': { comAporte: 97, semAporte: 97 },
             'DPI NORTE': { comAporte: 309, semAporte: 193 },
             'DPI SUL': { comAporte: 283, semAporte: 151 },
             'COPLAN': { comAporte: 284, semAporte: 264 },
@@ -1221,9 +1223,9 @@
                 coords: [-3.4100, -39.0300],
                 nome: 'PARACURU',
                 tipo: 'EXTRAORDINÁRIO',
-                horario: '24h',
-                efetivo: '1 DPC + 2 OIP',
-                valor: 'R$ 8.707,48',
+                horario: '18h às 06h',
+                efetivo: '1 DPC + 3 OIP',
+                valor: 'R$ 11.267,52',
                 status: 'APORTE NECESSÁRIO',
                 cor: '#e74c3c',
                 departamento: 'DPM'
@@ -1255,7 +1257,7 @@
                 nome: 'HORIZONTE',
                 tipo: 'ORDINÁRIO',
                 horario: '24h',
-                efetivo: '1 DPC + 3 OIP',
+                efetivo: '3 OIP',
                 valor: 'R$ 0,00',
                 status: '-',
                 cor: '#27ae60',
@@ -1266,17 +1268,17 @@
                 nome: 'MARACANAÚ',
                 tipo: 'ORDINÁRIO',
                 horario: '24h',
-                efetivo: '3 OIP',
-                valor: 'R$ 0,00',
+                efetivo: '3 OIP + 1 REFORÇO DE OIP',
+                valor: 'R$ 5.438,68',
                 status: '-',
                 cor: '#27ae60',
                 departamento: 'DPM'
             },
             itaitinga: {
                 coords: [-3.9686, -38.5303],
-                nome: 'ITAITINGA',
+                nome: 'ITAITINGA *SAP',
                 tipo: 'ORDINÁRIO',
-                horario: '24h',
+                horario: '08h às 19h',
                 efetivo: '1 DPC + 2 OIP',
                 valor: 'R$ 0,00',
                 status: '-',
