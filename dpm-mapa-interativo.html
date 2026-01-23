@@ -265,7 +265,7 @@
 
         <div class="stats">
             <div class="stat-card">
-                <h3 id="stat-municipios">47</h3>
+                <h3 id="stat-municipios">50</h3>
                 <p>Municípios</p>
             </div>
             <div class="stat-card">
@@ -273,15 +273,15 @@
                 <p>Investimento Total</p>
             </div>
             <div class="stat-card">
-                <h3 id="stat-departamentos">4</h3>
+                <h3 id="stat-departamentos">7</h3>
                 <p id="stat-departamentos-label">Departamentos</p>
             </div>
             <div class="stat-card">
-                <h3 id="stat-efetivo">221</h3>
+                <h3 id="stat-efetivo">279</h3>
                 <p>Efetivo Total</p>
             </div>
             <div class="stat-card">
-                <h3 id="stat-ordinario">33</h3>
+                <h3 id="stat-ordinario">36</h3>
                 <p>Ordinário</p>
             </div>
             <div class="stat-card">
@@ -318,6 +318,15 @@
                     </button>
                     <button class="filter-btn" data-filtro-depto onclick="filtrarPorDepartamento('COPLAN')">
                         🏢 COPLAN
+                    </button>
+                    <button class="filter-btn" data-filtro-depto onclick="filtrarPorDepartamento('DRCO')">
+                        🔍 DRCO
+                    </button>
+                    <button class="filter-btn" data-filtro-depto onclick="filtrarPorDepartamento('DTO')">
+                        🚨 DTO
+                    </button>
+                    <button class="filter-btn" data-filtro-depto onclick="filtrarPorDepartamento('CORE')">
+                        🛡️ CORE
                     </button>
                 </div>
                 
@@ -1007,6 +1016,51 @@
                         <p><strong>📝 Obs:</strong> APORTE NECESSÁRIO PARA REFORÇO</p>
                     </div>
                 </div>
+
+                <!-- DRCO -->
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-departamento="DRCO" data-key="draco" onclick="focusMap('draco')">
+                    <h3>
+                        DRACO
+                        <span class="badge ordinario">ORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>🏛️ Departamento:</strong> DRCO</p>
+                        <p><strong>⏰ Horário:</strong> 08h às 20h</p>
+                        <p><strong>👮 Efetivo:</strong> 2 DPC + 6 OIP (15 policiais)</p>
+                        <p><strong>📅 Ano:</strong> 14/02/2026</p>
+                        <p class="valor zero">💰 R$ 0,00</p>
+                    </div>
+                </div>
+
+                <!-- DTO -->
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-departamento="DTO" data-key="egide" onclick="focusMap('egide')">
+                    <h3>
+                        ÉGIDE
+                        <span class="badge ordinario">ORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>🏛️ Departamento:</strong> DTO</p>
+                        <p><strong>⏰ Horário:</strong> 19h às 01h</p>
+                        <p><strong>👮 Efetivo:</strong> 38 policiais</p>
+                        <p><strong>📅 Ano:</strong> 14/02/2026</p>
+                        <p class="valor zero">💰 R$ 0,00</p>
+                    </div>
+                </div>
+
+                <!-- CORE -->
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-departamento="CORE" data-key="core" onclick="focusMap('core')">
+                    <h3>
+                        CORE
+                        <span class="badge ordinario">ORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>🏛️ Departamento:</strong> CORE</p>
+                        <p><strong>⏰ Horário:</strong> 24h</p>
+                        <p><strong>👮 Efetivo:</strong> 5 policiais</p>
+                        <p><strong>📅 Ano:</strong> 14/02/2026</p>
+                        <p class="valor zero">💰 R$ 0,00</p>
+                    </div>
+                </div>
             </div>
 
             <div id="map"></div>
@@ -1036,7 +1090,8 @@
             'DHPP': { comAporte: 127, semAporte: 42 },
             'DPGV': { comAporte: 102, semAporte: 102 },
             'CORE': { comAporte: 35, semAporte: 35 },
-            'DPE': { comAporte: 47, semAporte: 24 }
+            'DPE': { comAporte: 47, semAporte: 24 },
+            'DRCO': { comAporte: 15, semAporte: 15 }
         };
 
         // Coordenadas dos municípios (aproximadas)
@@ -1560,6 +1615,42 @@
                 status: 'APORTE NECESSÁRIO PARA REFORÇO',
                 cor: '#27ae60',
                 departamento: 'COPLAN'
+            },
+            // DRCO
+            draco: {
+                coords: [-3.7320, -38.5260],
+                nome: 'DRACO',
+                tipo: 'ORDINÁRIO',
+                horario: '08h às 20h',
+                efetivo: '2 DPC + 6 OIP (15)',
+                valor: 'R$ 0,00',
+                status: '-',
+                cor: '#27ae60',
+                departamento: 'DRCO'
+            },
+            // DTO
+            egide: {
+                coords: [-3.7450, -38.5300],
+                nome: 'ÉGIDE',
+                tipo: 'ORDINÁRIO',
+                horario: '19h às 01h',
+                efetivo: '38',
+                valor: 'R$ 0,00',
+                status: '-',
+                cor: '#27ae60',
+                departamento: 'DTO'
+            },
+            // CORE
+            core: {
+                coords: [-3.7380, -38.5320],
+                nome: 'CORE',
+                tipo: 'ORDINÁRIO',
+                horario: '24h',
+                efetivo: '5',
+                valor: 'R$ 0,00',
+                status: '-',
+                cor: '#27ae60',
+                departamento: 'CORE'
             }
         };
 
