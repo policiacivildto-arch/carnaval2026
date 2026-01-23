@@ -275,7 +275,7 @@
         <div class="stats">
             <div class="stat-card">
                 <h3 id="stat-municipios">53</h3>
-                <p>Municípios</p>
+                <p>Delegacias</p>
             </div>
             <div class="stat-card">
                 <h3 id="stat-investimento">R$ 240.222,64</h3>
@@ -301,7 +301,7 @@
 
         <div class="content">
             <div class="info-panel">
-                <h2>🏢 Municípios</h2>
+                <h2>🏢 Delegacias</h2>
                 
                 <div class="filter-container">
                     <button class="filter-btn active" data-filtro-depto onclick="filtrarPorDepartamento('todos')">
@@ -1206,7 +1206,7 @@
             'DRCO': { comAporte: 88, semAporte: 88 }
         };
 
-        // Coordenadas dos municípios (aproximadas)
+        // Coordenadas das delegacias (aproximadas)
         const municipios = {
             paracuru: {
                 coords: [-3.4100, -39.0300],
@@ -1895,7 +1895,7 @@
             }
         }
 
-        // Função para filtrar municípios
+        // Função para filtrar delegacias
         function filtrarMunicipios(filtro) {
             // Remover classe active de todos os botões (exceto departamento)
             document.querySelectorAll('.filter-btn:not([data-filtro-depto])').forEach(btn => {
