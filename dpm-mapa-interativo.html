@@ -33,18 +33,18 @@
         header {
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
-            padding: 30px;
+            padding: 15px 30px;
             text-align: center;
         }
 
         header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+            font-size: 1.8em;
+            margin-bottom: 5px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         header p {
-            font-size: 1.2em;
+            font-size: 1em;
             opacity: 0.9;
         }
 
@@ -263,6 +263,15 @@
             <p>CARNAVAL - 2026</p>
         </header>
 
+        <div style="display: flex; justify-content: center; gap: 15px; padding: 20px; background: #f8f9fa; border-bottom: 2px solid #e0e0e0;">
+            <button class="filter-btn active" style="min-width: 200px; font-size: 1em;" onclick="filtrarMunicipios('com-aporte')">
+                💰 Com Aporte
+            </button>
+            <button class="filter-btn" style="min-width: 200px; font-size: 1em;" onclick="filtrarMunicipios('sem-aporte')">
+                📋 Sem Aporte
+            </button>
+        </div>
+
         <div class="stats">
             <div class="stat-card">
                 <h3 id="stat-municipios">53</h3>
@@ -293,15 +302,6 @@
         <div class="content">
             <div class="info-panel">
                 <h2>🏢 Municípios</h2>
-                
-                <div class="filter-container">
-                    <button class="filter-btn active" onclick="filtrarMunicipios('com-aporte')">
-                        💰 Com Aporte
-                    </button>
-                    <button class="filter-btn" onclick="filtrarMunicipios('sem-aporte')">
-                        📋 Sem Aporte
-                    </button>
-                </div>
                 
                 <div class="filter-container">
                     <button class="filter-btn active" data-filtro-depto onclick="filtrarPorDepartamento('todos')">
