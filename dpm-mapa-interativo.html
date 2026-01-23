@@ -2036,8 +2036,8 @@
                 const municipio = municipios[key];
                 
                 if (municipio) {
-                    // Unidades que não contam como delegacias (CEPROD, CORE, DTO)
-                    const unidadesEspeciais = ['ceprod', 'core', 'egide'];
+                    // Unidades que não contam como delegacias (CEPROD, CORE, DTO, Tenda Lilás)
+                    const unidadesEspeciais = ['ceprod', 'core', 'egide', 'tenda_lilas'];
                     if (!unidadesEspeciais.includes(key)) {
                         totalMunicipios++;
                     }
