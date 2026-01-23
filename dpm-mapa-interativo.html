@@ -2043,11 +2043,13 @@
                     departamentosUnicos.add(municipio.departamento);
                     departamentosParaEfetivo.add(municipio.departamento);
                     
-                    // Somar investimento
-                    const valorStr = municipio.valor.replace('R$', '').replace(/\./g, '').replace(',', '.').trim();
-                    const valor = parseFloat(valorStr);
-                    if (!isNaN(valor)) {
-                        totalInvestimento += valor;
+                    // Somar investimento apenas se filtro for "Com Aporte"
+                    if (filtroAporte === 'comAporte') {
+                        const valorStr = municipio.valor.replace('R$', '').replace(/\./g, '').replace(',', '.').trim();
+                        const valor = parseFloat(valorStr);
+                        if (!isNaN(valor)) {
+                            totalInvestimento += valor;
+                        }
                     }
                     
                     // Contar tipo
