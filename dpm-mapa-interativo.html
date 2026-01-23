@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação DPM - Região Metropolitana</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .info-panel {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            height: 600px;
+            overflow-y: auto;
+        }
+
+        .info-panel h2 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .municipio-card {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .municipio-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .municipio-card.extraordinario {
+            border-left-color: #e74c3c;
+        }
+
+        .municipio-card.ordinario {
+            border-left-color: #27ae60;
+        }
+
+        .municipio-card h3 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badge {
+            font-size: 0.7em;
+            padding: 4px 8px;
+            border-radius: 12px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .badge.extraordinario {
+            background: #e74c3c;
+        }
+
+        .badge.ordinario {
+            background: #27ae60;
+        }
+
+        .municipio-info {
+            font-size: 0.9em;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .municipio-info strong {
+            color: #2c3e50;
+        }
+
+        .valor {
+            font-size: 1.1em;
+            color: #27ae60;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .valor.zero {
+            color: #95a5a6;
+        }
+
+        #map {
+            height: 600px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .stat-card h3 {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+
+        .stat-card p {
+            opacity: 0.9;
+            font-size: 0.9em;
+        }
+
+        /* Custom Popup Styles */
+        .custom-popup {
+            min-width: 250px;
+        }
+
+        .custom-popup h3 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 5px;
+        }
+
+        .custom-popup p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 968px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            header h1 {
+                font-size: 1.8em;
+            }
+        }
+
+        /* Scrollbar personalizada */
+        .info-panel::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .info-panel::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .info-panel::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 10px;
+        }
+
+        .info-panel::-webkit-scrollbar-thumb:hover {
+            background: #764ba2;
+        }
+
+        /* Filtros */
+        .filter-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            flex: 1;
+            min-width: 140px;
+            padding: 12px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .filter-btn:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .municipio-card.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📍 Delegacias de Polícia Civil</h1>
+            <p>Região Metropolitana - Aporte Primeiro Regional</p>
+        </header>
+
+        <div class="stats">
+            <div class="stat-card">
+                <h3>6</h3>
+                <p>Municípios</p>
+            </div>
+            <div class="stat-card">
+                <h3>R$ 15.233,96</h3>
+                <p>Investimento Total</p>
+            </div>
+            <div class="stat-card">
+                <h3>2</h3>
+                <p>DPM Extraordinário</p>
+            </div>
+            <div class="stat-card">
+                <h3>4</h3>
+                <p>DPM Ordinário</p>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="info-panel">
+                <h2>🏢 Municípios</h2>
+                
+                <div class="filter-container">
+                    <button class="filter-btn active" onclick="filtrarMunicipios('com-aporte')">
+                        💰 Com Aporte
+                    </button>
+                    <button class="filter-btn" onclick="filtrarMunicipios('sem-aporte')">
+                        📋 Sem Aporte
+                    </button>
+                </div>
+                
+                <div class="municipio-card extraordinario" data-aporte="com-aporte" data-key="paracuru" onclick="focusMap('paracuru')">
+                    <h3>
+                        PARACURU
+                        <span class="badge extraordinario">EXTRAORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>⏰ Horário:</strong> 24h</p>
+                        <p><strong>👮 Efetivo:</strong> 1 DPC + 2 OIP</p>
+                        <p><strong>📅 Status:</strong> A DEFINIR</p>
+                        <p class="valor">💰 R$ 8.707,48</p>
+                    </div>
+                </div>
+
+                <div class="municipio-card extraordinario" data-aporte="com-aporte" data-key="cascavel" onclick="focusMap('cascavel')">
+                    <h3>
+                        CASCAVEL
+                        <span class="badge extraordinario">EXTRAORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>⏰ Horário:</strong> 18h às 06h</p>
+                        <p><strong>👮 Efetivo:</strong> 1 OIP</p>
+                        <p><strong>📅 Status:</strong> A DEFINIR</p>
+                        <p class="valor">💰 R$ 2.561,04</p>
+                    </div>
+                </div>
+
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-key="aquiraz" onclick="focusMap('aquiraz')">
+                    <h3>
+                        AQUIRAZ
+                        <span class="badge ordinario">ORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>⏰ Horário:</strong> 24h</p>
+                        <p><strong>👮 Efetivo:</strong> 3 OIP + 1 REFORÇO DE OIP</p>
+                        <p><strong>📅 Status:</strong> A DEFINIR</p>
+                        <p class="valor">💰 R$ 3.965,44</p>
+                    </div>
+                </div>
+
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-key="horizonte" onclick="focusMap('horizonte')">
+                    <h3>
+                        HORIZONTE
+                        <span class="badge ordinario">ORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>⏰ Horário:</strong> 24h</p>
+                        <p><strong>👮 Efetivo:</strong> 1 DPC + 3 OIP</p>
+                        <p><strong>📅 Status:</strong> -</p>
+                        <p class="valor zero">💰 R$ 0,00</p>
+                    </div>
+                </div>
+
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-key="maracanau" onclick="focusMap('maracanau')">
+                    <h3>
+                        MARACANAÚ
+                        <span class="badge ordinario">ORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>⏰ Horário:</strong> 24h</p>
+                        <p><strong>👮 Efetivo:</strong> 3 OIP</p>
+                        <p><strong>📅 Status:</strong> -</p>
+                        <p class="valor zero">💰 R$ 0,00</p>
+                    </div>
+                </div>
+
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-key="itaitinga" onclick="focusMap('itaitinga')">
+                    <h3>
+                        ITAITINGA
+                        <span class="badge ordinario">ORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>⏰ Horário:</strong> 24h</p>
+                        <p><strong>👮 Efetivo:</strong> 1 DPC + 2 OIP</p>
+                        <p><strong>📅 Status:</strong> -</p>
+                        <p class="valor zero">💰 R$ 0,00</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <script>
+        // Inicializar o mapa centrado na Região Metropolitana de Fortaleza
+        const map = L.map('map').setView([-3.8, -38.5], 10);
+
+        // Adicionar camada de mapa OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors',
+            maxZoom: 18
+        }).addTo(map);
+
+        // Coordenadas dos municípios (aproximadas)
+        const municipios = {
+            paracuru: {
+                coords: [-3.4100, -39.0300],
+                nome: 'PARACURU',
+                tipo: 'EXTRAORDINÁRIO',
+                horario: '24h',
+                efetivo: '1 DPC + 2 OIP',
+                valor: 'R$ 8.707,48',
+                status: 'A DEFINIR',
+                cor: '#e74c3c'
+            },
+            cascavel: {
+                coords: [-4.1333, -38.2417],
+                nome: 'CASCAVEL',
+                tipo: 'EXTRAORDINÁRIO',
+                horario: '18h às 06h',
+                efetivo: '1 OIP',
+                valor: 'R$ 2.561,04',
+                status: 'A DEFINIR',
+                cor: '#e74c3c'
+            },
+            aquiraz: {
+                coords: [-3.9014, -38.3911],
+                nome: 'AQUIRAZ',
+                tipo: 'ORDINÁRIO',
+                horario: '24h',
+                efetivo: '3 OIP + 1 REFORÇO DE OIP',
+                valor: 'R$ 3.965,44',
+                status: 'A DEFINIR',
+                cor: '#27ae60'
+            },
+            horizonte: {
+                coords: [-4.0986, -38.4908],
+                nome: 'HORIZONTE',
+                tipo: 'ORDINÁRIO',
+                horario: '24h',
+                efetivo: '1 DPC + 3 OIP',
+                valor: 'R$ 0,00',
+                status: '-',
+                cor: '#27ae60'
+            },
+            maracanau: {
+                coords: [-3.8767, -38.6253],
+                nome: 'MARACANAÚ',
+                tipo: 'ORDINÁRIO',
+                horario: '24h',
+                efetivo: '3 OIP',
+                valor: 'R$ 0,00',
+                status: '-',
+                cor: '#27ae60'
+            },
+            itaitinga: {
+                coords: [-3.9686, -38.5303],
+                nome: 'ITAITINGA',
+                tipo: 'ORDINÁRIO',
+                horario: '24h',
+                efetivo: '1 DPC + 2 OIP',
+                valor: 'R$ 0,00',
+                status: '-',
+                cor: '#27ae60'
+            }
+        };
+
+        // Armazenar marcadores para controle
+        const markers = {};
+
+        // Adicionar marcadores ao mapa
+        Object.keys(municipios).forEach(key => {
+            const m = municipios[key];
+            
+            // Criar ícone personalizado
+            const icon = L.divIcon({
+                className: 'custom-marker',
+                html: `<div style="background: ${m.cor}; width: 30px; height: 30px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); border: 3px solid white; box-shadow: 0 3px 10px rgba(0,0,0,0.3);"></div>`,
+                iconSize: [30, 30],
+                iconAnchor: [15, 30]
+            });
+
+            // Criar popup
+            const popupContent = `
+                <div class="custom-popup">
+                    <h3>🏢 ${m.nome}</h3>
+                    <p><strong>Tipo:</strong> <span style="color: ${m.cor}; font-weight: bold;">${m.tipo}</span></p>
+                    <p><strong>⏰ Horário:</strong> ${m.horario}</p>
+                    <p><strong>👮 Efetivo:</strong> ${m.efetivo}</p>
+                    <p><strong>💰 Valor:</strong> <span style="color: #27ae60; font-weight: bold;">${m.valor}</span></p>
+                    <p><strong>📅 Status:</strong> ${m.status}</p>
+                </div>
+            `;
+
+            // Adicionar marcador
+            const marker = L.marker(m.coords, { icon: icon })
+                .bindPopup(popupContent)
+                .addTo(map);
+
+            markers[key] = marker;
+        });
+
+        // Função para focar em um município específico
+        function focusMap(municipioKey) {
+            const m = municipios[municipioKey];
+            if (m) {
+                map.setView(m.coords, 13);
+                markers[municipioKey].openPopup();
+            }
+        }
+
+        // Função para filtrar municípios
+        function filtrarMunicipios(filtro) {
+            // Remover classe active de todos os botões
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Adicionar classe active no botão clicado
+            event.target.classList.add('active');
+            
+            // Pegar todos os cards de municípios
+            const cards = document.querySelectorAll('.municipio-card');
+            
+            cards.forEach(card => {
+                const aporte = card.getAttribute('data-aporte');
+                const key = card.getAttribute('data-key');
+                
+                if (filtro === 'todos') {
+                    // Mostrar todos
+                    card.classList.remove('hidden');
+                    if (markers[key]) {
+                        map.addLayer(markers[key]);
+                    }
+                } else if (filtro === 'com-aporte') {
+                    // Mostrar todas as delegacias (extraordinárias + ordinárias)
+                    card.classList.remove('hidden');
+                    if (markers[key]) {
+                        map.addLayer(markers[key]);
+                    }
+                } else if (filtro === 'sem-aporte') {
+                    // Mostrar apenas ordinárias (sem aporte)
+                    if (aporte === 'sem-aporte') {
+                        card.classList.remove('hidden');
+                        if (markers[key]) {
+                            map.addLayer(markers[key]);
+                        }
+                    } else {
+                        card.classList.add('hidden');
+                        if (markers[key]) {
+                            map.removeLayer(markers[key]);
+                        }
+                    }
+                }
+            });
+            
+            // Ajustar zoom do mapa para mostrar todos os marcadores visíveis
+            setTimeout(() => {
+                const visibleMarkers = [];
+                Object.keys(markers).forEach(key => {
+                    if (map.hasLayer(markers[key])) {
+                        visibleMarkers.push(markers[key]);
+                    }
+                });
+                
+                if (visibleMarkers.length > 0) {
+                    const group = L.featureGroup(visibleMarkers);
+                    map.fitBounds(group.getBounds().pad(0.1));
+                }
+            }, 100);
+        }
+
+        // Adicionar título ao mapa
+        const title = L.control({position: 'topright'});
+        title.onAdd = function(map) {
+            const div = L.DomUtil.create('div', 'map-title');
+            div.innerHTML = `
+                <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.2);">
+                    <h4 style="margin: 0; color: #1e3c72;">Legenda</h4>
+                    <p style="margin: 5px 0; font-size: 0.9em;">
+                        <span style="color: #e74c3c;">●</span> Extraordinário<br>
+                        <span style="color: #27ae60;">●</span> Ordinário
+                    </p>
+                </div>
+            `;
+            return div;
+        };
+        title.addTo(map);
+    </script>
+</body>
+</html>
