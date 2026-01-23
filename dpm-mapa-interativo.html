@@ -254,44 +254,34 @@
         .municipio-card.hidden {
             display: none;
         }
-
-        /* Animação de piscar para viaturas extraordinárias */
-        @keyframes piscar {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.3; transform: scale(1.1); }
-        }
-
-        .viatura-extraordinaria {
-            animation: piscar 1.5s ease-in-out infinite;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>📍 Delegacias de Polícia Civil</h1>
-            <p>Região Metropolitana - Aporte Primeiro Regional</p>
+            <p>CARNAVAL - 2026</p>
         </header>
 
         <div class="stats">
             <div class="stat-card">
-                <h3>21</h3>
+                <h3>38</h3>
                 <p>Municípios</p>
             </div>
             <div class="stat-card">
-                <h3>R$ 77.242,58</h3>
+                <h3>R$ 176.426,60</h3>
                 <p>Investimento Total</p>
             </div>
             <div class="stat-card">
-                <h3>2</h3>
+                <h3>3</h3>
                 <p>Departamentos</p>
             </div>
             <div class="stat-card">
-                <h3>14</h3>
+                <h3>24</h3>
                 <p>Ordinário</p>
             </div>
             <div class="stat-card">
-                <h3>7</h3>
+                <h3>14</h3>
                 <p>Extraordinário</p>
             </div>
         </div>
@@ -318,6 +308,9 @@
                     </button>
                     <button class="filter-btn" data-filtro-depto onclick="filtrarPorDepartamento('DPI NORTE')">
                         🌄 DPI NORTE
+                    </button>
+                    <button class="filter-btn" data-filtro-depto onclick="filtrarPorDepartamento('DPI SUL')">
+                        🌅 DPI SUL
                     </button>
                 </div>
                 
@@ -630,6 +623,255 @@
                         <p><strong>📝 Obs:</strong> SÓ ABRE SE TIVER APORTE</p>
                     </div>
                 </div>
+
+                <!-- DPI SUL -->
+                <div class="municipio-card extraordinario" data-aporte="com-aporte" data-departamento="DPI SUL" data-key="varzea_alegre" onclick="focusMap('varzea_alegre')">
+                    <h3>
+                        VÁRZEA ALEGRE
+                        <span class="badge extraordinario">EXTRAORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>🏛️ Departamento:</strong> DPI SUL</p>
+                        <p><strong>⏰ Horário:</strong> 18h às 04h</p>
+                        <p><strong>👮 Efetivo:</strong> 1 DPC + 3 OIP</p>
+                        <p><strong>📅 Ano:</strong> 14/02/2026</p>
+                        <p class="valor">💰 R$ 7.784,32</p>
+                        <p><strong>📝 Obs:</strong> APORTE NECESSÁRIO</p>
+                    </div>
+                </div>
+
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-departamento="DPI SUL" data-key="senador_pompeu" onclick="focusMap('senador_pompeu')">
+                    <h3>
+                        SENADOR POMPEU
+                        <span class="badge ordinario">ORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>🏛️ Departamento:</strong> DPI SUL</p>
+                        <p><strong>⏰ Horário:</strong> 24h</p>
+                        <p><strong>👮 Efetivo:</strong> 1 DPC + 3 OIP</p>
+                        <p><strong>📅 Ano:</strong> 14/02/2026</p>
+                        <p class="valor">💰 R$ 3.965,44</p>
+                        <p><strong>📝 Obs:</strong> APORTE NECESSÁRIO PARA REFORÇO PARA SEGUNDA E TERÇA</p>
+                    </div>
+                </div>
+
+                <div class="municipio-card extraordinario" data-aporte="com-aporte" data-departamento="DPI SUL" data-key="jaguaruana" onclick="focusMap('jaguaruana')">
+                    <h3>
+                        JAGUARUANA
+                        <span class="badge extraordinario">EXTRAORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>🏛️ Departamento:</strong> DPI SUL</p>
+                        <p><strong>⏰ Horário:</strong> 20h às 04h</p>
+                        <p><strong>👮 Efetivo:</strong> 1 DPC + 3 OIP</p>
+                        <p><strong>📅 Ano:</strong> 14/02/2026</p>
+                        <p class="valor">💰 R$ 7.693,44</p>
+                        <p><strong>📝 Obs:</strong> APORTE NECESSÁRIO</p>
+                    </div>
+                </div>
+
+                <div class="municipio-card extraordinario" data-aporte="com-aporte" data-departamento="DPI SUL" data-key="banabuiu" onclick="focusMap('banabuiu')">
+                    <h3>
+                        BANABUIU
+                        <span class="badge extraordinario">EXTRAORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>🏛️ Departamento:</strong> DPI SUL</p>
+                        <p><strong>⏰ Horário:</strong> 13h às 23h</p>
+                        <p><strong>👮 Efetivo:</strong> 2 OIP</p>
+                        <p><strong>📅 Ano:</strong> 14/02/2026</p>
+                        <p class="valor">💰 R$ 3.394,06</p>
+                        <p><strong>📝 Obs:</strong> APORTE NECESSÁRIO</p>
+                    </div>
+                </div>
+
+                <div class="municipio-card extraordinario" data-aporte="com-aporte" data-departamento="DPI SUL" data-key="fortim" onclick="focusMap('fortim')">
+                    <h3>
+                        FORTIM
+                        <span class="badge extraordinario">EXTRAORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>🏛️ Departamento:</strong> DPI SUL</p>
+                        <p><strong>⏰ Horário:</strong> 14h às 02h</p>
+                        <p><strong>👮 Efetivo:</strong> 1 DPC + 2 OIP</p>
+                        <p><strong>📅 Ano:</strong> 14/02/2026</p>
+                        <p class="valor">💰 R$ 7.021,36</p>
+                        <p><strong>📝 Obs:</strong> APORTE NECESSÁRIO</p>
+                    </div>
+                </div>
+
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-departamento="DPI SUL" data-key="crato" onclick="focusMap('crato')">
+                    <h3>
+                        CRATO
+                        <span class="badge ordinario">ORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>🏛️ Departamento:</strong> DPI SUL</p>
+                        <p><strong>⏰ Horário:</strong> 24h</p>
+                        <p><strong>👮 Efetivo:</strong> 1 DPC + 3 OIP</p>
+                        <p><strong>📅 Ano:</strong> 14/02/2026</p>
+                        <p class="valor zero">💰 R$ 0,00</p>
+                    </div>
+                </div>
+
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-departamento="DPI SUL" data-key="aracati" onclick="focusMap('aracati')">
+                    <h3>
+                        ARACATI
+                        <span class="badge ordinario">ORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>🏛️ Departamento:</strong> DPI SUL</p>
+                        <p><strong>⏰ Horário:</strong> 24h</p>
+                        <p><strong>👮 Efetivo:</strong> 1 DPC + 3 OIP + 3 OIP UR</p>
+                        <p><strong>📅 Ano:</strong> 14/02/2026</p>
+                        <p class="valor">💰 R$ 20.657,00</p>
+                        <p><strong>📝 Obs:</strong> APORTE NECESSÁRIO</p>
+                    </div>
+                </div>
+
+                <div class="municipio-card extraordinario" data-aporte="com-aporte" data-departamento="DPI SUL" data-key="beberibe" onclick="focusMap('beberibe')">
+                    <h3>
+                        BEBERIBE
+                        <span class="badge extraordinario">EXTRAORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>🏛️ Departamento:</strong> DPI SUL</p>
+                        <p><strong>⏰ Horário:</strong> 24h</p>
+                        <p><strong>👮 Efetivo:</strong> 1 DPC + 3 OIP</p>
+                        <p><strong>📅 Ano:</strong> 14/02/2026</p>
+                        <p class="valor">💰 R$ 20.657,00</p>
+                        <p><strong>📝 Obs:</strong> APORTE NECESSÁRIO</p>
+                    </div>
+                </div>
+
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-departamento="DPI SUL" data-key="russas" onclick="focusMap('russas')">
+                    <h3>
+                        RUSSAS
+                        <span class="badge ordinario">ORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>🏛️ Departamento:</strong> DPI SUL</p>
+                        <p><strong>⏰ Horário:</strong> 24h</p>
+                        <p><strong>👮 Efetivo:</strong> 3 OIP</p>
+                        <p><strong>📅 Ano:</strong> 14/02/2026</p>
+                        <p class="valor zero">💰 R$ 0,00</p>
+                    </div>
+                </div>
+
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-departamento="DPI SUL" data-key="brejo_santo" onclick="focusMap('brejo_santo')">
+                    <h3>
+                        BREJO SANTO
+                        <span class="badge ordinario">ORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>🏛️ Departamento:</strong> DPI SUL</p>
+                        <p><strong>⏰ Horário:</strong> 24h</p>
+                        <p><strong>👮 Efetivo:</strong> 3 OIP</p>
+                        <p><strong>📅 Ano:</strong> 14/02/2026</p>
+                        <p class="valor zero">💰 R$ 0,00</p>
+                    </div>
+                </div>
+
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-departamento="DPI SUL" data-key="juazeiro" onclick="focusMap('juazeiro')">
+                    <h3>
+                        JUAZEIRO DO NORTE
+                        <span class="badge ordinario">ORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>🏛️ Departamento:</strong> DPI SUL</p>
+                        <p><strong>⏰ Horário:</strong> 24h</p>
+                        <p><strong>👮 Efetivo:</strong> 1 DPC + 3 OIP</p>
+                        <p><strong>📅 Ano:</strong> 14/02/2026</p>
+                        <p class="valor zero">💰 R$ 0,00</p>
+                    </div>
+                </div>
+
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-departamento="DPI SUL" data-key="quixada" onclick="focusMap('quixada')">
+                    <h3>
+                        QUIXADÁ
+                        <span class="badge ordinario">ORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>🏛️ Departamento:</strong> DPI SUL</p>
+                        <p><strong>⏰ Horário:</strong> 24h</p>
+                        <p><strong>👮 Efetivo:</strong> 3 OIP</p>
+                        <p><strong>📅 Ano:</strong> 14/02/2026</p>
+                        <p class="valor zero">💰 R$ 0,00</p>
+                    </div>
+                </div>
+
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-departamento="DPI SUL" data-key="iguatu" onclick="focusMap('iguatu')">
+                    <h3>
+                        IGUATU
+                        <span class="badge ordinario">ORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>🏛️ Departamento:</strong> DPI SUL</p>
+                        <p><strong>⏰ Horário:</strong> 24h</p>
+                        <p><strong>👮 Efetivo:</strong> 1 DPC + 3 OIP</p>
+                        <p><strong>📅 Ano:</strong> 14/02/2026</p>
+                        <p class="valor zero">💰 R$ 0,00</p>
+                    </div>
+                </div>
+
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-departamento="DPI SUL" data-key="taua" onclick="focusMap('taua')">
+                    <h3>
+                        TAUÁ
+                        <span class="badge ordinario">ORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>🏛️ Departamento:</strong> DPI SUL</p>
+                        <p><strong>⏰ Horário:</strong> 24h</p>
+                        <p><strong>👮 Efetivo:</strong> 3 OIP</p>
+                        <p><strong>📅 Ano:</strong> 14/02/2026</p>
+                        <p class="valor zero">💰 R$ 0,00</p>
+                    </div>
+                </div>
+
+                <div class="municipio-card extraordinario" data-aporte="com-aporte" data-departamento="DPI SUL" data-key="quixeramobim" onclick="focusMap('quixeramobim')">
+                    <h3>
+                        QUIXERAMOBIM*
+                        <span class="badge extraordinario">EXTRAORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>🏛️ Departamento:</strong> DPI SUL</p>
+                        <p><strong>⏰ Horário:</strong> 24h</p>
+                        <p><strong>👮 Efetivo:</strong> 1 DPC + 3 OIP</p>
+                        <p><strong>📅 Ano:</strong> 14/02/2026</p>
+                        <p class="valor">💰 R$ 13.019,20</p>
+                        <p><strong>📝 Obs:</strong> APORTE NECESSÁRIO</p>
+                    </div>
+                </div>
+
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-departamento="DPI SUL" data-key="oros" onclick="focusMap('oros')">
+                    <h3>
+                        ÓROS*
+                        <span class="badge ordinario">ORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>🏛️ Departamento:</strong> DPI SUL</p>
+                        <p><strong>⏰ Horário:</strong> 20h às 08h</p>
+                        <p><strong>👮 Efetivo:</strong> 1 DPC + 3 OIP</p>
+                        <p><strong>📅 Ano:</strong> 14/02/2026</p>
+                        <p class="valor">💰 R$ 4.846,24</p>
+                        <p><strong>📝 Obs:</strong> APORTE NECESSÁRIO PARA REFORÇO PARA SEGUNDA E TERÇA</p>
+                    </div>
+                </div>
+
+                <div class="municipio-card extraordinario" data-aporte="com-aporte" data-departamento="DPI SUL" data-key="sonolope" onclick="focusMap('sonolope')">
+                    <h3>
+                        SONOLOPE*
+                        <span class="badge extraordinario">EXTRAORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>🏛️ Departamento:</strong> DPI SUL</p>
+                        <p><strong>⏰ Horário:</strong> 18h às 04h</p>
+                        <p><strong>👮 Efetivo:</strong> 2 OIP</p>
+                        <p><strong>📅 Ano:</strong> 14/02/2026</p>
+                        <p class="valor">💰 R$ 3.497,36</p>
+                        <p><strong>📝 Obs:</strong> APORTE NECESSÁRIO</p>
+                    </div>
+                </div>
             </div>
 
             <div id="map"></div>
@@ -882,6 +1124,194 @@
                 status: 'APORTE NECESSÁRIO',
                 cor: '#e74c3c',
                 departamento: 'DPI NORTE'
+            },
+            // DPI SUL
+            varzea_alegre: {
+                coords: [-6.7850, -39.2950],
+                nome: 'VÁRZEA ALEGRE',
+                tipo: 'EXTRAORDINÁRIO',
+                horario: '18h às 04h',
+                efetivo: '1 DPC + 3 OIP',
+                valor: 'R$ 7.784,32',
+                status: 'APORTE NECESSÁRIO',
+                cor: '#e74c3c',
+                departamento: 'DPI SUL'
+            },
+            senador_pompeu: {
+                coords: [-5.5867, -39.3708],
+                nome: 'SENADOR POMPEU',
+                tipo: 'ORDINÁRIO',
+                horario: '24h',
+                efetivo: '1 DPC + 3 OIP',
+                valor: 'R$ 3.965,44',
+                status: 'APORTE NECESSÁRIO PARA REFORÇO',
+                cor: '#27ae60',
+                departamento: 'DPI SUL'
+            },
+            jaguaruana: {
+                coords: [-5.8900, -37.7800],
+                nome: 'JAGUARUANA',
+                tipo: 'EXTRAORDINÁRIO',
+                horario: '20h às 04h',
+                efetivo: '1 DPC + 3 OIP',
+                valor: 'R$ 7.693,44',
+                status: 'APORTE NECESSÁRIO',
+                cor: '#e74c3c',
+                departamento: 'DPI SUL'
+            },
+            banabuiu: {
+                coords: [-5.3089, -38.9200],
+                nome: 'BANABUIU',
+                tipo: 'EXTRAORDINÁRIO',
+                horario: '13h às 23h',
+                efetivo: '2 OIP',
+                valor: 'R$ 3.394,06',
+                status: 'APORTE NECESSÁRIO',
+                cor: '#e74c3c',
+                departamento: 'DPI SUL'
+            },
+            fortim: {
+                coords: [-4.4508, -37.7967],
+                nome: 'FORTIM',
+                tipo: 'EXTRAORDINÁRIO',
+                horario: '14h às 02h',
+                efetivo: '1 DPC + 2 OIP',
+                valor: 'R$ 7.021,36',
+                status: 'APORTE NECESSÁRIO',
+                cor: '#e74c3c',
+                departamento: 'DPI SUL'
+            },
+            crato: {
+                coords: [-7.2342, -39.4097],
+                nome: 'CRATO',
+                tipo: 'ORDINÁRIO',
+                horario: '24h',
+                efetivo: '1 DPC + 3 OIP',
+                valor: 'R$ 0,00',
+                status: '-',
+                cor: '#27ae60',
+                departamento: 'DPI SUL'
+            },
+            aracati: {
+                coords: [-4.5619, -37.7697],
+                nome: 'ARACATI',
+                tipo: 'ORDINÁRIO',
+                horario: '24h',
+                efetivo: '1 DPC + 3 OIP + 3 OIP UR',
+                valor: 'R$ 20.657,00',
+                status: 'APORTE NECESSÁRIO',
+                cor: '#27ae60',
+                departamento: 'DPI SUL'
+            },
+            beberibe: {
+                coords: [-4.1797, -38.1306],
+                nome: 'BEBERIBE',
+                tipo: 'EXTRAORDINÁRIO',
+                horario: '24h',
+                efetivo: '1 DPC + 3 OIP',
+                valor: 'R$ 20.657,00',
+                status: 'APORTE NECESSÁRIO',
+                cor: '#e74c3c',
+                departamento: 'DPI SUL'
+            },
+            russas: {
+                coords: [-4.9400, -37.9758],
+                nome: 'RUSSAS',
+                tipo: 'ORDINÁRIO',
+                horario: '24h',
+                efetivo: '3 OIP',
+                valor: 'R$ 0,00',
+                status: '-',
+                cor: '#27ae60',
+                departamento: 'DPI SUL'
+            },
+            brejo_santo: {
+                coords: [-7.4892, -38.9856],
+                nome: 'BREJO SANTO',
+                tipo: 'ORDINÁRIO',
+                horario: '24h',
+                efetivo: '3 OIP',
+                valor: 'R$ 0,00',
+                status: '-',
+                cor: '#27ae60',
+                departamento: 'DPI SUL'
+            },
+            juazeiro: {
+                coords: [-7.2131, -39.3150],
+                nome: 'JUAZEIRO DO NORTE',
+                tipo: 'ORDINÁRIO',
+                horario: '24h',
+                efetivo: '1 DPC + 3 OIP',
+                valor: 'R$ 0,00',
+                status: '-',
+                cor: '#27ae60',
+                departamento: 'DPI SUL'
+            },
+            quixada: {
+                coords: [-4.9694, -39.0150],
+                nome: 'QUIXADÁ',
+                tipo: 'ORDINÁRIO',
+                horario: '24h',
+                efetivo: '3 OIP',
+                valor: 'R$ 0,00',
+                status: '-',
+                cor: '#27ae60',
+                departamento: 'DPI SUL'
+            },
+            iguatu: {
+                coords: [-6.3597, -39.2986],
+                nome: 'IGUATU',
+                tipo: 'ORDINÁRIO',
+                horario: '24h',
+                efetivo: '1 DPC + 3 OIP',
+                valor: 'R$ 0,00',
+                status: '-',
+                cor: '#27ae60',
+                departamento: 'DPI SUL'
+            },
+            taua: {
+                coords: [-6.0008, -40.2928],
+                nome: 'TAUÁ',
+                tipo: 'ORDINÁRIO',
+                horario: '24h',
+                efetivo: '3 OIP',
+                valor: 'R$ 0,00',
+                status: '-',
+                cor: '#27ae60',
+                departamento: 'DPI SUL'
+            },
+            quixeramobim: {
+                coords: [-5.1978, -39.2936],
+                nome: 'QUIXERAMOBIM*',
+                tipo: 'EXTRAORDINÁRIO',
+                horario: '24h',
+                efetivo: '1 DPC + 3 OIP',
+                valor: 'R$ 13.019,20',
+                status: 'APORTE NECESSÁRIO',
+                cor: '#e74c3c',
+                departamento: 'DPI SUL'
+            },
+            oros: {
+                coords: [-6.2419, -38.9114],
+                nome: 'ÓROS*',
+                tipo: 'ORDINÁRIO',
+                horario: '20h às 08h',
+                efetivo: '1 DPC + 3 OIP',
+                valor: 'R$ 4.846,24',
+                status: 'APORTE NECESSÁRIO PARA REFORÇO',
+                cor: '#27ae60',
+                departamento: 'DPI SUL'
+            },
+            sonolope: {
+                coords: [-5.7250, -40.0000],
+                nome: 'SONOLOPE*',
+                tipo: 'EXTRAORDINÁRIO',
+                horario: '18h às 04h',
+                efetivo: '2 OIP',
+                valor: 'R$ 3.497,36',
+                status: 'APORTE NECESSÁRIO',
+                cor: '#e74c3c',
+                departamento: 'DPI SUL'
             }
         };
 
@@ -892,15 +1322,12 @@
         Object.keys(municipios).forEach(key => {
             const m = municipios[key];
             
-            // Definir classe de animação para extraordinárias
-            const animacaoClass = m.tipo === 'EXTRAORDINÁRIO' ? 'viatura-extraordinaria' : '';
-            
             // Criar ícone personalizado (viatura com nome)
             const icon = L.divIcon({
                 className: 'custom-marker',
                 html: `
                     <div style="display: flex; align-items: center; gap: 5px; white-space: nowrap;">
-                        <div class="${animacaoClass}" style="font-size: 28px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); filter: drop-shadow(0 0 3px ${m.cor});">🚔</div>
+                        <div style="font-size: 28px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); filter: drop-shadow(0 0 3px ${m.cor});">🚔</div>
                         <div style="background: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; color: ${m.cor}; box-shadow: 0 2px 5px rgba(0,0,0,0.3); border: 1px solid ${m.cor};">${m.nome}</div>
                     </div>
                 `,
