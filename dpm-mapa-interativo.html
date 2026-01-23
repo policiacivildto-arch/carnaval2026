@@ -265,27 +265,27 @@
 
         <div class="stats">
             <div class="stat-card">
-                <h3 id="stat-municipios">50</h3>
+                <h3 id="stat-municipios">54</h3>
                 <p>Municípios</p>
             </div>
             <div class="stat-card">
-                <h3 id="stat-investimento">R$ 197.455,96</h3>
+                <h3 id="stat-investimento">R$ 239.494,63</h3>
                 <p>Investimento Total</p>
             </div>
             <div class="stat-card">
-                <h3 id="stat-departamentos">7</h3>
+                <h3 id="stat-departamentos">9</h3>
                 <p id="stat-departamentos-label">Departamentos</p>
             </div>
             <div class="stat-card">
-                <h3 id="stat-efetivo">279</h3>
+                <h3 id="stat-efetivo">300</h3>
                 <p>Efetivo Total</p>
             </div>
             <div class="stat-card">
-                <h3 id="stat-ordinario">36</h3>
+                <h3 id="stat-ordinario">39</h3>
                 <p>Ordinário</p>
             </div>
             <div class="stat-card">
-                <h3 id="stat-extraordinario">14</h3>
+                <h3 id="stat-extraordinario">15</h3>
                 <p>Extraordinário</p>
             </div>
         </div>
@@ -327,6 +327,12 @@
                     </button>
                     <button class="filter-btn" data-filtro-depto onclick="filtrarPorDepartamento('CORE')">
                         🛡️ CORE
+                    </button>
+                    <button class="filter-btn" data-filtro-depto onclick="filtrarPorDepartamento('DHPP')">
+                        🔫 DHPP
+                    </button>
+                    <button class="filter-btn" data-filtro-depto onclick="filtrarPorDepartamento('DPE')">
+                        ⚖️ DPE
                     </button>
                 </div>
                 
@@ -1061,6 +1067,66 @@
                         <p class="valor zero">💰 R$ 0,00</p>
                     </div>
                 </div>
+
+                <!-- DHPP -->
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-departamento="DHPP" data-key="plantao_dhpp" onclick="focusMap('plantao_dhpp')">
+                    <h3>
+                        PLANTÃO DHPP
+                        <span class="badge ordinario">ORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>🏛️ Departamento:</strong> DHPP</p>
+                        <p><strong>⏰ Horário:</strong> 24h</p>
+                        <p><strong>👮 Efetivo:</strong> 1 DPC + 6 OIP</p>
+                        <p><strong>📅 Ano:</strong> 14/02/2026</p>
+                        <p class="valor zero">💰 R$ 0,00</p>
+                    </div>
+                </div>
+
+                <div class="municipio-card extraordinario" data-aporte="com-aporte" data-departamento="DHPP" data-key="dhpp_caucaia" onclick="focusMap('dhpp_caucaia')">
+                    <h3>
+                        DHPP CAUCAIA
+                        <span class="badge extraordinario">EXTRAORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>🏛️ Departamento:</strong> DHPP</p>
+                        <p><strong>⏰ Horário:</strong> 08h às 17h</p>
+                        <p><strong>👮 Efetivo:</strong> 4 OIP</p>
+                        <p><strong>📅 Ano:</strong> 14/02/2026</p>
+                        <p class="valor">💰 R$ 35.677,47</p>
+                        <p><strong>📝 Obs:</strong> APORTE NECESSÁRIO</p>
+                    </div>
+                </div>
+
+                <!-- DPE -->
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-departamento="DPE" data-key="decap" onclick="focusMap('decap')">
+                    <h3>
+                        DECAP
+                        <span class="badge ordinario">ORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>🏛️ Departamento:</strong> DPE</p>
+                        <p><strong>⏰ Horário:</strong> 24h</p>
+                        <p><strong>👮 Efetivo:</strong> 2 OIP (3 extras + 2 ordinários)</p>
+                        <p><strong>📅 Ano:</strong> 14/02/2026</p>
+                        <p class="valor">💰 R$ 6.361,20</p>
+                        <p><strong>📝 Obs:</strong> APORTE NECESSÁRIO PARA REFORÇO</p>
+                    </div>
+                </div>
+
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-departamento="DPE" data-key="daer" onclick="focusMap('daer')">
+                    <h3>
+                        DAER
+                        <span class="badge ordinario">ORDINÁRIO</span>
+                    </h3>
+                    <div class="municipio-info">
+                        <p><strong>🏛️ Departamento:</strong> DPE</p>
+                        <p><strong>⏰ Horário:</strong> 24h</p>
+                        <p><strong>👮 Efetivo:</strong> 3 OIP</p>
+                        <p><strong>📅 Ano:</strong> 14/02/2026</p>
+                        <p class="valor zero">💰 R$ 0,00</p>
+                    </div>
+                </div>
             </div>
 
             <div id="map"></div>
@@ -1651,6 +1717,52 @@
                 status: '-',
                 cor: '#27ae60',
                 departamento: 'CORE'
+            },
+            // DHPP
+            plantao_dhpp: {
+                coords: [-3.7280, -38.5380],
+                nome: 'PLANTÃO DHPP',
+                tipo: 'ORDINÁRIO',
+                horario: '24h',
+                efetivo: '1 DPC + 6 OIP',
+                valor: 'R$ 0,00',
+                status: '-',
+                cor: '#27ae60',
+                departamento: 'DHPP'
+            },
+            dhpp_caucaia: {
+                coords: [-3.7361, -38.6531],
+                nome: 'DHPP CAUCAIA',
+                tipo: 'EXTRAORDINÁRIO',
+                horario: '08h às 17h',
+                efetivo: '4 OIP',
+                valor: 'R$ 35.677,47',
+                status: 'APORTE NECESSÁRIO',
+                cor: '#e74c3c',
+                departamento: 'DHPP'
+            },
+            // DPE
+            decap: {
+                coords: [-3.7290, -38.5420],
+                nome: 'DECAP',
+                tipo: 'ORDINÁRIO',
+                horario: '24h',
+                efetivo: '2 OIP (5 total)',
+                valor: 'R$ 6.361,20',
+                status: 'APORTE NECESSÁRIO PARA REFORÇO',
+                cor: '#27ae60',
+                departamento: 'DPE'
+            },
+            daer: {
+                coords: [-3.7310, -38.5450],
+                nome: 'DAER',
+                tipo: 'ORDINÁRIO',
+                horario: '24h',
+                efetivo: '3 OIP',
+                valor: 'R$ 0,00',
+                status: '-',
+                cor: '#27ae60',
+                departamento: 'DPE'
             }
         };
 
