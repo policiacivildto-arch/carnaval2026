@@ -320,6 +320,9 @@
         .comparativo-table .custo-cell {
             color: #27ae60;
             font-weight: bold;
+            text-align: right;
+            font-family: 'Courier New', monospace;
+            padding-right: 20px;
         }
 
         .comparativo-table .reducao-cell {
@@ -332,6 +335,48 @@
             gap: 10px;
             margin-bottom: 20px;
             flex-wrap: wrap;
+        }
+
+        .resumo-custos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .custo-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .custo-card h3 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .custo-card .valor-total {
+            font-size: 2em;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .grafico-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-top: 30px;
+        }
+
+        .grafico-container h3 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+            text-align: center;
         }
     </style>
 </head>
@@ -347,7 +392,7 @@
                 💰 Com/Sem Aporte
             </button>
             <button class="filter-btn" id="btn-comparativo" style="min-width: 200px; font-size: 1em;" onclick="mostrarAba('comparativo')">
-                📊 Comparativo Departamental
+                📊 Comparativo 
             </button>
         </div>
 
@@ -572,8 +617,76 @@
                             <td></td>
                             <td><span style="background: #fff9e6; padding: 4px 8px; border-radius: 4px; font-weight: bold;">2025</span></td>
                         </tr>
+                        <tr class="ano-2025" data-ano="2025">
+                            <td>ARACATI</td>
+                            <td>20</td>
+                            <td></td>
+                            <td class="custo-cell">R$ 14.759,10</td>
+                            <td>20</td>
+                            <td class="reducao-cell"></td>
+                            <td></td>
+                            <td><span style="background: #fff9e6; padding: 4px 8px; border-radius: 4px; font-weight: bold;">2025</span></td>
+                        </tr>
+                        <tr class="ano-2025" data-ano="2025">
+                            <td>BEBERIBE</td>
+                            <td>20</td>
+                            <td></td>
+                            <td class="custo-cell">R$ 12.223,26</td>
+                            <td>20</td>
+                            <td class="reducao-cell"></td>
+                            <td></td>
+                            <td><span style="background: #fff9e6; padding: 4px 8px; border-radius: 4px; font-weight: bold;">2025</span></td>
+                        </tr>
+                        <tr class="ano-2025" data-ano="2025">
+                            <td>SÃO BENEDITO</td>
+                            <td></td>
+                            <td>12</td>
+                            <td class="custo-cell">R$ 3.738,38</td>
+                            <td>12</td>
+                            <td class="reducao-cell"></td>
+                            <td></td>
+                            <td><span style="background: #fff9e6; padding: 4px 8px; border-radius: 4px; font-weight: bold;">2025</span></td>
+                        </tr>
+                        <tr class="ano-2025" data-ano="2025">
+                            <td>GUARAMIRANGA</td>
+                            <td></td>
+                            <td>12</td>
+                            <td class="custo-cell">R$ 4.832,46</td>
+                            <td>12</td>
+                            <td class="reducao-cell"></td>
+                            <td></td>
+                            <td><span style="background: #fff9e6; padding: 4px 8px; border-radius: 4px; font-weight: bold;">2025</span></td>
+                        </tr>
+                        <tr class="ano-2025" data-ano="2025">
+                            <td>PARACURU</td>
+                            <td></td>
+                            <td>16</td>
+                            <td class="custo-cell">R$ 10.383,96</td>
+                            <td>16</td>
+                            <td class="reducao-cell"></td>
+                            <td></td>
+                            <td><span style="background: #fff9e6; padding: 4px 8px; border-radius: 4px; font-weight: bold;">2025</span></td>
+                        </tr>
                     </tbody>
                 </table>
+
+                <!-- Resumo de Custos -->
+                <div class="resumo-custos">
+                    <div class="custo-card">
+                        <h3>💰 Custo Total 2026</h3>
+                        <div class="valor-total" id="custo-2026">R$ 0,00</div>
+                    </div>
+                    <div class="custo-card">
+                        <h3>💰 Custo Total 2025</h3>
+                        <div class="valor-total" id="custo-2025">R$ 0,00</div>
+                    </div>
+                </div>
+
+                <!-- Gráfico de Efetivo -->
+                <div class="grafico-container">
+                    <h3>📊 Comparação de Efetivo por Departamento</h3>
+                    <canvas id="graficoEfetivo" style="max-height: 400px;"></canvas>
+                </div>
             </div>
         </div>
 
@@ -1503,6 +1616,10 @@
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    
     <script>
         // Inicializar o mapa centrado na Região Metropolitana de Fortaleza
         const map = L.map('map').setView([-3.8, -38.5], 10);
@@ -2231,11 +2348,135 @@
                 document.getElementById('btn-comparativo').classList.add('active');
                 document.getElementById('view-comparativo').classList.add('active');
                 document.getElementById('view-aporte').classList.remove('active');
+                
+                // Calcular custos e gerar gráfico quando abrir aba comparativo
+                setTimeout(() => {
+                    calcularCustoTotal();
+                    gerarGraficoEfetivo();
+                }, 100);
             }
         }
 
         // Variável global para controlar filtro de comparativo
         let anoComparativoAtivo = 'todos';
+        let graficoEfetivo = null;
+
+        // Dados para o gráfico
+        const dadosComparativo = {
+            departamentos: ['DPI SUL', 'DPI NORTE', 'COPLAN', 'DHPP', 'DPM', 'DRCO', 'DPE', 'CORE', 'DPGV', 'ÉGIDE'],
+            ordinario2026: [151, 193, 264, 42, 56, 0, 34, 35, 71, 0],
+            extra2026: [132, 116, 20, 85, 41, 88, 13, 0, 31, 198],
+            ordinario2025: [150, 125, 220, 85, 75, 0, 65, 35, 65, 0],
+            extra2025: [110, 187, 25, 55, 145, 0, 0, 0, 60, 250]
+        };
+
+        // Função para calcular custo total
+        function calcularCustoTotal() {
+            const custos2026 = [92.535, 69.385, 21.260, 35.677, 23.786, 0, 6.464, 0, 0, 0];
+            const custos2025 = [26.014, 43.713, 16.280, 0, 13.972, 0, 0, 0, 0, 0, 14.759, 12.223, 3.738, 4.832, 10.384];
+            
+            const total2026 = custos2026.reduce((a, b) => a + b, 0) * 100; // converter para reais
+            const total2025 = custos2025.reduce((a, b) => a + b, 0) * 100; // converter para reais
+            
+            // Formatar com ponto para milhares e vírgula para decimais
+            const total2026mil = Math.round(total2026).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            const total2025mil = Math.round(total2025).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            
+            document.getElementById('custo-2026').textContent = 'R$ ' + total2026mil + ',00';
+            document.getElementById('custo-2025').textContent = 'R$ ' + total2025mil + ',00';
+        }
+
+        // Função para gerar gráfico de efetivo
+        function gerarGraficoEfetivo() {
+            const ctx = document.getElementById('graficoEfetivo');
+            if (!ctx) return;
+            
+            // Registrar plugin de datalabels
+            Chart.register(ChartDataLabels);
+            
+            // Destruir gráfico anterior se existir
+            if (graficoEfetivo) {
+                graficoEfetivo.destroy();
+            }
+            
+            graficoEfetivo = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: dadosComparativo.departamentos,
+                    datasets: [
+                        {
+                            label: 'Ordinário 2026',
+                            data: dadosComparativo.ordinario2026,
+                            backgroundColor: '#27ae60',
+                            borderColor: '#229954',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Extra 2026',
+                            data: dadosComparativo.extra2026,
+                            backgroundColor: '#e74c3c',
+                            borderColor: '#c0392b',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Ordinário 2025',
+                            data: dadosComparativo.ordinario2025,
+                            backgroundColor: '#3498db',
+                            borderColor: '#2980b9',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Extra 2025',
+                            data: dadosComparativo.extra2025,
+                            backgroundColor: '#f39c12',
+                            borderColor: '#e67e22',
+                            borderWidth: 1,
+                            datalabels: {
+                                display: true
+                            }
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                padding: 15,
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        },
+                        datalabels: {
+                            display: true,
+                            anchor: 'end',
+                            align: 'top'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 50
+                            },
+                            title: {
+                                display: true,
+                                text: 'Quantidade de Efetivo'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Departamentos'
+                            }
+                        }
+                    }
+                }
+            });
+        }
 
         // Função para filtrar comparativo por ano
         function filtrarComparativoAno(ano) {
