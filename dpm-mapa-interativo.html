@@ -263,6 +263,76 @@
         .municipio-card.hidden {
             display: none;
         }
+
+        /* Estilos para abas e comparativo */
+        .view-section {
+            display: none;
+        }
+
+        .view-section.active {
+            display: block;
+        }
+
+        .comparativo-container {
+            padding: 20px;
+            overflow-x: auto;
+        }
+
+        .comparativo-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .comparativo-table thead {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+        }
+
+        .comparativo-table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .comparativo-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 0.9em;
+        }
+
+        .comparativo-table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .comparativo-table tbody tr.ano-2026 {
+            background-color: #e8f4f8;
+        }
+
+        .comparativo-table tbody tr.ano-2025 {
+            background-color: #fff9e6;
+        }
+
+        .comparativo-table .custo-cell {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .comparativo-table .reducao-cell {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .comparativo-filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
     </style>
 </head>
 <body>
@@ -271,6 +341,244 @@
             <h1>📍 Delegacias de Polícia Civil</h1>
             <p>CARNAVAL - 2026</p>
         </header>
+
+        <div style="display: flex; justify-content: center; gap: 15px; padding: 20px; background: #f8f9fa; border-bottom: 2px solid #e0e0e0;">
+            <button class="filter-btn active" id="btn-aporte" style="min-width: 200px; font-size: 1em;" onclick="mostrarAba('aporte')">
+                💰 Com/Sem Aporte
+            </button>
+            <button class="filter-btn" id="btn-comparativo" style="min-width: 200px; font-size: 1em;" onclick="mostrarAba('comparativo')">
+                📊 Comparativo Departamental
+            </button>
+        </div>
+
+        <!-- Seção de Comparativo -->
+        <div id="view-comparativo" class="view-section">
+            <div class="comparativo-container">
+                <h2 style="color: #1e3c72; margin-bottom: 20px; text-align: center;">📊 Comparativo Departamental 2025-2026</h2>
+                
+                <div class="comparativo-filters">
+                    <button class="filter-btn active" onclick="filtrarComparativoAno('todos')" id="comp-todos">
+                        🏛️ Todos os Anos
+                    </button>
+                    <button class="filter-btn" onclick="filtrarComparativoAno('2026')" id="comp-2026">
+                        📅 2026
+                    </button>
+                    <button class="filter-btn" onclick="filtrarComparativoAno('2025')" id="comp-2025">
+                        📅 2025
+                    </button>
+                </div>
+
+                <table class="comparativo-table">
+                    <thead>
+                        <tr>
+                            <th>DEPARTAMENTO</th>
+                            <th>EFETIVO ORDINÁRIO</th>
+                            <th>EFETIVO EXTRA</th>
+                            <th>CUSTO</th>
+                            <th>TOTAL</th>
+                            <th>REDUÇÃO DO EFETIVO</th>
+                            <th>MOTIVO</th>
+                            <th>ANO</th>
+                        </tr>
+                    </thead>
+                    <tbody id="comparativo-tbody">
+                        <tr class="ano-2026" data-ano="2026">
+                            <td>DPI SUL</td>
+                            <td>151</td>
+                            <td>132</td>
+                            <td class="custo-cell">R$ 92.535,66</td>
+                            <td>283</td>
+                            <td class="reducao-cell"></td>
+                            <td></td>
+                            <td><span style="background: #e8f4f8; padding: 4px 8px; border-radius: 4px; font-weight: bold;">2026</span></td>
+                        </tr>
+                        <tr class="ano-2026" data-ano="2026">
+                            <td>DPI NORTE</td>
+                            <td>193</td>
+                            <td>116</td>
+                            <td class="custo-cell">R$ 69.385,99</td>
+                            <td>309</td>
+                            <td class="reducao-cell"></td>
+                            <td></td>
+                            <td><span style="background: #e8f4f8; padding: 4px 8px; border-radius: 4px; font-weight: bold;">2026</span></td>
+                        </tr>
+                        <tr class="ano-2026" data-ano="2026">
+                            <td>COPLAN</td>
+                            <td>264</td>
+                            <td>20</td>
+                            <td class="custo-cell">R$ 21.260,56</td>
+                            <td>284</td>
+                            <td class="reducao-cell"></td>
+                            <td></td>
+                            <td><span style="background: #e8f4f8; padding: 4px 8px; border-radius: 4px; font-weight: bold;">2026</span></td>
+                        </tr>
+                        <tr class="ano-2026" data-ano="2026">
+                            <td>DHPP</td>
+                            <td>42</td>
+                            <td>85</td>
+                            <td class="custo-cell">R$ 35.677,47</td>
+                            <td>127</td>
+                            <td class="reducao-cell">55</td>
+                            <td>SEGUIMENTO</td>
+                            <td><span style="background: #e8f4f8; padding: 4px 8px; border-radius: 4px; font-weight: bold;">2026</span></td>
+                        </tr>
+                        <tr class="ano-2026" data-ano="2026">
+                            <td>DPM</td>
+                            <td>56</td>
+                            <td>41</td>
+                            <td class="custo-cell">R$ 23.786,00</td>
+                            <td>97</td>
+                            <td class="reducao-cell">60</td>
+                            <td>SEGUIMENTO</td>
+                            <td><span style="background: #e8f4f8; padding: 4px 8px; border-radius: 4px; font-weight: bold;">2026</span></td>
+                        </tr>
+                        <tr class="ano-2026" data-ano="2026">
+                            <td>DRCO</td>
+                            <td></td>
+                            <td>88</td>
+                            <td class="custo-cell"></td>
+                            <td>88</td>
+                            <td class="reducao-cell"></td>
+                            <td></td>
+                            <td><span style="background: #e8f4f8; padding: 4px 8px; border-radius: 4px; font-weight: bold;">2026</span></td>
+                        </tr>
+                        <tr class="ano-2026" data-ano="2026">
+                            <td>DPE</td>
+                            <td>34</td>
+                            <td>13</td>
+                            <td class="custo-cell">R$ 6.464,50</td>
+                            <td>47</td>
+                            <td class="reducao-cell"></td>
+                            <td></td>
+                            <td><span style="background: #e8f4f8; padding: 4px 8px; border-radius: 4px; font-weight: bold;">2026</span></td>
+                        </tr>
+                        <tr class="ano-2026" data-ano="2026">
+                            <td>CORE</td>
+                            <td>35</td>
+                            <td></td>
+                            <td class="custo-cell"></td>
+                            <td>35</td>
+                            <td class="reducao-cell"></td>
+                            <td></td>
+                            <td><span style="background: #e8f4f8; padding: 4px 8px; border-radius: 4px; font-weight: bold;">2026</span></td>
+                        </tr>
+                        <tr class="ano-2026" data-ano="2026">
+                            <td>DPGV</td>
+                            <td>71</td>
+                            <td>31</td>
+                            <td class="custo-cell"></td>
+                            <td>102</td>
+                            <td class="reducao-cell"></td>
+                            <td></td>
+                            <td><span style="background: #e8f4f8; padding: 4px 8px; border-radius: 4px; font-weight: bold;">2026</span></td>
+                        </tr>
+                        <tr class="ano-2026" data-ano="2026">
+                            <td>ÉGIDE</td>
+                            <td></td>
+                            <td>198</td>
+                            <td class="custo-cell"></td>
+                            <td>198</td>
+                            <td class="reducao-cell">52</td>
+                            <td>COMBOIO</td>
+                            <td><span style="background: #e8f4f8; padding: 4px 8px; border-radius: 4px; font-weight: bold;">2026</span></td>
+                        </tr>
+                        <tr class="ano-2025" data-ano="2025">
+                            <td>COPLAN</td>
+                            <td>220</td>
+                            <td>25</td>
+                            <td class="custo-cell">R$ 16.280,06</td>
+                            <td>245</td>
+                            <td class="reducao-cell"></td>
+                            <td></td>
+                            <td><span style="background: #fff9e6; padding: 4px 8px; border-radius: 4px; font-weight: bold;">2025</span></td>
+                        </tr>
+                        <tr class="ano-2025" data-ano="2025">
+                            <td>DHPP</td>
+                            <td>85</td>
+                            <td>55</td>
+                            <td class="custo-cell"></td>
+                            <td>140</td>
+                            <td class="reducao-cell"></td>
+                            <td></td>
+                            <td><span style="background: #fff9e6; padding: 4px 8px; border-radius: 4px; font-weight: bold;">2025</span></td>
+                        </tr>
+                        <tr class="ano-2025" data-ano="2025">
+                            <td>DPGV</td>
+                            <td>65</td>
+                            <td>60</td>
+                            <td class="custo-cell"></td>
+                            <td>125</td>
+                            <td class="reducao-cell"></td>
+                            <td></td>
+                            <td><span style="background: #fff9e6; padding: 4px 8px; border-radius: 4px; font-weight: bold;">2025</span></td>
+                        </tr>
+                        <tr class="ano-2025" data-ano="2025">
+                            <td>DPE</td>
+                            <td>65</td>
+                            <td></td>
+                            <td class="custo-cell"></td>
+                            <td>65</td>
+                            <td class="reducao-cell"></td>
+                            <td></td>
+                            <td><span style="background: #fff9e6; padding: 4px 8px; border-radius: 4px; font-weight: bold;">2025</span></td>
+                        </tr>
+                        <tr class="ano-2025" data-ano="2025">
+                            <td>DPM</td>
+                            <td>75</td>
+                            <td>145</td>
+                            <td class="custo-cell">R$ 13.972,92</td>
+                            <td>220</td>
+                            <td class="reducao-cell"></td>
+                            <td></td>
+                            <td><span style="background: #fff9e6; padding: 4px 8px; border-radius: 4px; font-weight: bold;">2025</span></td>
+                        </tr>
+                        <tr class="ano-2025" data-ano="2025">
+                            <td>DPI NORTE</td>
+                            <td>125</td>
+                            <td>187</td>
+                            <td class="custo-cell">R$ 43.713,24</td>
+                            <td>312</td>
+                            <td class="reducao-cell"></td>
+                            <td></td>
+                            <td><span style="background: #fff9e6; padding: 4px 8px; border-radius: 4px; font-weight: bold;">2025</span></td>
+                        </tr>
+                        <tr class="ano-2025" data-ano="2025">
+                            <td>DPI SUL</td>
+                            <td>150</td>
+                            <td>110</td>
+                            <td class="custo-cell">R$ 26.014,24</td>
+                            <td>260</td>
+                            <td class="reducao-cell"></td>
+                            <td></td>
+                            <td><span style="background: #fff9e6; padding: 4px 8px; border-radius: 4px; font-weight: bold;">2025</span></td>
+                        </tr>
+                        <tr class="ano-2025" data-ano="2025">
+                            <td>CORE</td>
+                            <td>35</td>
+                            <td></td>
+                            <td class="custo-cell"></td>
+                            <td>35</td>
+                            <td class="reducao-cell"></td>
+                            <td></td>
+                            <td><span style="background: #fff9e6; padding: 4px 8px; border-radius: 4px; font-weight: bold;">2025</span></td>
+                        </tr>
+                        <tr class="ano-2025" data-ano="2025">
+                            <td>ÉGIDE</td>
+                            <td></td>
+                            <td>250</td>
+                            <td class="custo-cell"></td>
+                            <td>250</td>
+                            <td class="reducao-cell"></td>
+                            <td></td>
+                            <td><span style="background: #fff9e6; padding: 4px 8px; border-radius: 4px; font-weight: bold;">2025</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Seção de Aporte (original) -->
+        <div id="view-aporte" class="view-section active">
 
         <div style="display: flex; justify-content: center; gap: 15px; padding: 20px; background: #f8f9fa; border-bottom: 2px solid #e0e0e0;">
             <button class="filter-btn active" style="min-width: 200px; font-size: 1em;" onclick="filtrarMunicipios('com-aporte')">
@@ -287,7 +595,7 @@
                 <p>Delegacias</p>
             </div>
             <div class="stat-card">
-                <h3 id="stat-investimento">R$ 240.222,64</h3>
+                <h3 id="stat-investimento">R$ 249.110,50</h3>
                 <p>Investimento Total</p>
             </div>
             <div class="stat-card">
@@ -295,7 +603,7 @@
                 <p id="stat-departamentos-label">Departamentos</p>
             </div>
             <div class="stat-card">
-                <h3 id="stat-efetivo">1565</h3>
+                <h3 id="stat-efetivo">1570</h3>
                 <p>Efetivo Total</p>
             </div>
             <div class="stat-card">
@@ -376,7 +684,7 @@
                         <p class="valor">💰 R$ 2.602,36</p>
                     </div>
                 </div>
-<div class="municipio-card ordinario" data-aporte="com-aporte" data-departamento="DPM" data-key="caucaia" onclick="focusMap('caucaia')">
+<div class="municipio-card ordinario" data-aporte="sem-aporte" data-departamento="DPM" data-key="caucaia" onclick="focusMap('caucaia')">
     <h3>
         CAUCAIA
         <span class="badge ordinario">ORDINÁRIO</span>
@@ -386,7 +694,7 @@
         <p><strong>⏰ Horário:</strong> 24h</p>
         <p><strong>👮 Efetivo:</strong> 3 OIP</p>
         <p><strong>📅 Ano:</strong> 14/02/2026</p>
-        <p class="valor">💰 R$ 0,00</p>
+        <p class="valor zero">💰 R$ 0,00</p>
         <p><strong>📋 Obs:</strong> -</p>
     </div>
 </div>
@@ -523,7 +831,7 @@
                     </div>
                 </div>
 
-                <div class="municipio-card ordinario" data-aporte="com-aporte" data-departamento="DPI NORTE" data-key="camocim" onclick="focusMap('camocim')">
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-departamento="DPI NORTE" data-key="camocim" onclick="focusMap('camocim')">
                     <h3>
                         CAMOCIM
                         <span class="badge ordinario">ORDINÁRIO</span>
@@ -538,7 +846,7 @@
                     </div>
                 </div>
 
-                <div class="municipio-card ordinario" data-aporte="com-aporte" data-departamento="DPI NORTE" data-key="tiangua" onclick="focusMap('tiangua')">
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-departamento="DPI NORTE" data-key="tiangua" onclick="focusMap('tiangua')">
                     <h3>
                         TIANGUÁ
                         <span class="badge ordinario">ORDINÁRIO</span>
@@ -553,7 +861,7 @@
                     </div>
                 </div>
 
-                <div class="municipio-card ordinario" data-aporte="com-aporte" data-departamento="DPI NORTE" data-key="sobral" onclick="focusMap('sobral')">
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-departamento="DPI NORTE" data-key="sobral" onclick="focusMap('sobral')">
                     <h3>
                         SOBRAL
                         <span class="badge ordinario">ORDINÁRIO</span>
@@ -568,7 +876,7 @@
                     </div>
                 </div>
 
-                <div class="municipio-card ordinario" data-aporte="com-aporte" data-departamento="DPI NORTE" data-key="baturite" onclick="focusMap('baturite')">
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-departamento="DPI NORTE" data-key="baturite" onclick="focusMap('baturite')">
                     <h3>
                         BATURITÉ
                         <span class="badge ordinario">ORDINÁRIO</span>
@@ -583,7 +891,7 @@
                     </div>
                 </div>
 
-                <div class="municipio-card ordinario" data-aporte="com-aporte" data-departamento="DPI NORTE" data-key="caninde" onclick="focusMap('caninde')">
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-departamento="DPI NORTE" data-key="caninde" onclick="focusMap('caninde')">
                     <h3>
                         CANINDÉ
                         <span class="badge ordinario">ORDINÁRIO</span>
@@ -598,7 +906,7 @@
                     </div>
                 </div>
 
-                <div class="municipio-card ordinario" data-aporte="com-aporte" data-departamento="DPI NORTE" data-key="crateus" onclick="focusMap('crateus')">
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-departamento="DPI NORTE" data-key="crateus" onclick="focusMap('crateus')">
                     <h3>
                         CRATEÚS
                         <span class="badge ordinario">ORDINÁRIO</span>
@@ -613,7 +921,7 @@
                     </div>
                 </div>
 
-                <div class="municipio-card ordinario" data-aporte="com-aporte" data-departamento="DPI NORTE" data-key="itapipoca" onclick="focusMap('itapipoca')">
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-departamento="DPI NORTE" data-key="itapipoca" onclick="focusMap('itapipoca')">
                     <h3>
                         ITAPIPOCA
                         <span class="badge ordinario">ORDINÁRIO</span>
@@ -628,7 +936,7 @@
                     </div>
                 </div>
 
-                <div class="municipio-card ordinario" data-aporte="com-aporte" data-departamento="DPI NORTE" data-key="acarau" onclick="focusMap('acarau')">
+                <div class="municipio-card ordinario" data-aporte="sem-aporte" data-departamento="DPI NORTE" data-key="acarau" onclick="focusMap('acarau')">
                     <h3>
                         ACARAÚ
                         <span class="badge ordinario">ORDINÁRIO</span>
@@ -1188,6 +1496,8 @@
 
             <div id="map"></div>
         </div>
+        </div>
+        <!-- Fim da seção view-aporte -->
     </div>
 
     <!-- Leaflet JS -->
@@ -1205,7 +1515,7 @@
 
         // Efetivo real por departamento
         const efetivoRealPorDepartamento = {
-            'DPM': { comAporte: 97, semAporte: 97 },
+            'DPM': { comAporte: 97, semAporte: 62 },
             'DPI NORTE': { comAporte: 309, semAporte: 193 },
             'DPI SUL': { comAporte: 283, semAporte: 151 },
             'COPLAN': { comAporte: 284, semAporte: 264 },
@@ -1904,6 +2214,54 @@
                 map.setView(m.coords, 13);
                 markers[municipioKey].openPopup();
             }
+        }
+
+        // Funções para controlar abas
+        function mostrarAba(aba) {
+            // Remover active de todos os botões principais
+            document.getElementById('btn-aporte').classList.remove('active');
+            document.getElementById('btn-comparativo').classList.remove('active');
+            
+            // Adicionar active no botão clicado
+            if (aba === 'aporte') {
+                document.getElementById('btn-aporte').classList.add('active');
+                document.getElementById('view-aporte').classList.add('active');
+                document.getElementById('view-comparativo').classList.remove('active');
+            } else if (aba === 'comparativo') {
+                document.getElementById('btn-comparativo').classList.add('active');
+                document.getElementById('view-comparativo').classList.add('active');
+                document.getElementById('view-aporte').classList.remove('active');
+            }
+        }
+
+        // Variável global para controlar filtro de comparativo
+        let anoComparativoAtivo = 'todos';
+
+        // Função para filtrar comparativo por ano
+        function filtrarComparativoAno(ano) {
+            anoComparativoAtivo = ano;
+            
+            // Remover active de todos os botões de ano
+            document.getElementById('comp-todos').classList.remove('active');
+            document.getElementById('comp-2026').classList.remove('active');
+            document.getElementById('comp-2025').classList.remove('active');
+            
+            // Adicionar active no botão clicado
+            document.getElementById('comp-' + (ano === 'todos' ? 'todos' : ano)).classList.add('active');
+            
+            // Aplicar filtro
+            const tbody = document.getElementById('comparativo-tbody');
+            const linhas = tbody.querySelectorAll('tr');
+            
+            linhas.forEach(linha => {
+                const anoLinha = linha.getAttribute('data-ano');
+                
+                if (anoComparativoAtivo === 'todos' || anoLinha === anoComparativoAtivo) {
+                    linha.style.display = '';
+                } else {
+                    linha.style.display = 'none';
+                }
+            });
         }
 
         // Função para filtrar delegacias
